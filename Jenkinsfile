@@ -16,13 +16,11 @@ environment {
 
         stage('SonarQube analysis') {
             steps {
-                withSonarQubeEnv(credentialsId: 'd76101e577c5fb9f9ac096861cbada508e108c7c', installationName: 'sbhatool-sonarqube-server') {
+                withSonarQubeEnv(installationName: 'sbhatool-sonarqube-server') {
                     sh 'mvn org.sonarsource.scanner.maven:sonar-maven-plugin:3.11.0.3922:sonar'
             }
             
             }
         }
-
-        
     }
 }
