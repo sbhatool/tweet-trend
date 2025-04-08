@@ -1,4 +1,6 @@
 def registry = 'https://sbhatool01.jfrog.io'
+def imageName = 'sbhatool01.jfrog.io/sbhatool-docker-local/ttrend'
+def version   = '2.1.2'
 pipeline {
     agent {
         node {
@@ -56,6 +58,29 @@ environment {
                         echo '<--------------- Jar Publish Ended --------------->'  
                 }
             }   
-        }   
+        }
+
+
+        stage(" Docker Build ") {
+            steps {
+               script {
+                        echo '<--------------- Docker Build Started --------------->'
+                        app = docker.build(imageName+":"+version)
+                        echo '<--------------- Docker Build Ends --------------->'
+        }
+      }
+    }
+
+         stage (" Docker Publish "){
+            steps {
+             script {
+                        echo '<--------------- Docker Publish Started --------------->'  
+                         docker.withRegistry(registry, 'artifact-cred'){
+                         app.push()
+                }    
+                        echo '<--------------- Docker Publish Ended --------------->'  
+            }
+        }
+    }   
     }
 }
