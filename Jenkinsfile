@@ -1,6 +1,6 @@
 def registry = 'https://sbhatool01.jfrog.io'
 def imageName = 'sbhatool01.jfrog.io/sbhatool-docker-local/ttrend'
-def version   = '2.1.2'
+def version   = '2.1.3'
 pipeline {
     agent {
         node {
